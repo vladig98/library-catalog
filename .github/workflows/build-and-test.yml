@@ -1,0 +1,38 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: 'npm'
+
+    - name: Install Node packages
+      run: npm install
+
+    - name: Install Playwright
+      run: npm install -D @playwright/test
+
+    - name: Start the App in the background
+      run: npm start &
+
+    - name: Start backend
+      run: node server/server.js
+
+    - name: Wait for the App to be ready
+      run: sleep 10 # Adjust the sleep time as needed to ensure the app is ready
+
+    - name: Test the App
+      run: npx playwright test tests/ui.test.js
