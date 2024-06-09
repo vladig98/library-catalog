@@ -29,7 +29,7 @@ jobs:
       run: npm start &
 
     - name: Start backend
-      run: node server/server.js
+      run: node server/server.js &
 
     - name: Wait for the App to be ready
       run: sleep 10 # Adjust the sleep time as needed to ensure the app is ready
