@@ -5,6 +5,9 @@ on:
     workflows: ["Build and Test"]
     types:
       - completed
+    conditions:
+      - success()
+    workflow_dispatch:
 
 jobs:
   deploy-backend:
