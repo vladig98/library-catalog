@@ -23,7 +23,7 @@ jobs:
       run: npm install
 
     - name: change the config
-      run: echo "export const settings = { host:\"http://localhost:3030\"}"
+      run: echo "export const settings = { host:\"http://localhost:3030\"}" > config.js
 
     - name: Install Playwright
       run: npm install -D @playwright/test
